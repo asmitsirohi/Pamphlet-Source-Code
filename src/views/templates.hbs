@@ -2,6 +2,7 @@
 
 <div class="container my-4">
     <div class="row">
+        {{#if templates}}
         {{#each templates }}
         <div class="col-sm-4 mb-4">
             <div class="card">
@@ -25,5 +26,15 @@
             </div>
         </div>
         {{/each}}
+        {{else}}
+        <div class="container my-4">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class=" text-center display-4 text-danger">No Templates</h1>
+                </div>
+            </div>
+        </div>
+
+        {{/if}}
     </div>
 </div>
