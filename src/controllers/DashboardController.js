@@ -38,7 +38,7 @@ class DashboardController {
       loggedinUser = loggedinUser.name;
     }
 
-    const params = { title: "Portfolio Template", loggedinUser, role };
+    const params = { title: "Pamphlet", loggedinUser, role };
     res.status(200).render("index", params);
   };
 
