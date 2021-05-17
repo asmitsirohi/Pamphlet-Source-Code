@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPortfolio</title>
+    <link rel="stylesheet" href="/templateDependencies/bs4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <script src="/templateDependencies/bs4/jquery-3.5.1.min.js"></script>
+    <script src="/templateDependencies/bs4/popper.min.js"></script>
+    <script src="/templateDependencies/bs4/js/bootstrap.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .navbar {
+            padding: 16px 8px;
+        }
+
+        .bg-light {
+            background-color: white !important;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav ul li a {
+            font-size: 19px;
+            padding: 0 19px !important;
+        }
+
+        .intro .infoRow {
+            margin: 20vh 0 8vh 0;
+        }
+
+        .about .infoRow {
+            margin: 10vh 0 8vh 0;
+        }
+
+        .skills .infoRow {
+            margin: 9vh 0 8vh 0;
+        }
+
+        .skills .card p {
+            font-weight: bold;
+        }
+
+        .projects .infoRow {
+            margin: 9vh 0 8vh 0;
+        }
+
+        .projects .card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tagLine {
+            font-size: 18px;
+        }
+
+        .profileImage {
+            /* width: 18vw; */
+            /* background-color: aqua; */
+            position: relative;
+            bottom: 30px;
+        }
+
+        .skills .card-body {
+            padding: 0.5rem;
+        }
+
+        .project_link {
+            text-decoration: none !important;
+        }
+
+        .fab {
+            font-size: 28px;
+            padding: 0 12px;
+            color: #090909;
+        }
+
+        .main-heading {
+            margin-top: 10vh;
+        }
+
+        .card {
+            cursor: pointer;
+        }
+
+        .projectsCard:hover {
+            transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+        }
+
+
+        @media screen and (max-width: 991px) {
+            .nav-item a {
+                margin: 15px 0;
+            }
+
+            .navbar-nav {
+                margin-top: 30px;
+            }
+
+            .intro .infoRow {
+                margin: 5vh 0 8vh 0;
+            }
+
+            .profileImage {
+                bottom: 8px;
+            }
+
+            .links {
+                position: relative;
+                top: 18px;
+            }
+
+            .about .infoRow {
+                margin: 5vh 0 8vh 0;
+            }
+
+            .main-heading {
+                margin-top: 5vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <a class="navbar-brand" href="#">iPortfolio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#intro">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <hr>
+
+        <section class="intro" id="intro">
+            <div class="row infoRow">
+                <div class="col-sm-6">
+                    <h1 class=" font-weight-bolder">
+                        Hello, I am John Doe.
+                    </h1>
+                    <h3 class="font-weight-bolder">
+                        A <span class="typewrite font-weight-bolder text-danger" data-period="2000"
+                            data-type='[ "Dummy Text1", "Dummy Text3", "Dummy Text3"]'>
+                            <span class="wrap"></span>
+                        </span>.
+                    </h3>
+                    <p class="mt-4 tagLine">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorum
+                        architecto
+                        nisi ipsa?</p>
+                </div>
+                <div class="col-sm-6">
+                    <img src="/templateDependencies/images/avatar.png" alt="Profile Pic"
+                        class="profileImage rounded mx-auto d-block" width="250px">
+
+                    <p class="text-center links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://github.com/asmitsirohi"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="about" id="about">
+            <div class="row infoRow">
+                <h1 class="font-weight-bold">About</h1>
+
+                <p class="mt-4">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis unde quis est sunt nobis molestias
+                    necessitatibus, quos sint culpa vero nam quo doloribus veritatis ducimus accusantium maxime fugiat
+                    asperiores numquam commodi dignissimos molestiae harum autem. Pariatur at blanditiis ea molestiae
+                    accusantium officiis voluptate natus. Nam quam recusandae eveniet deserunt rem!
+                </p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="skills" id="skills">
+            <div class="main-heading">
+                <h1 class="font-weight-bold">Skills</h1>
+            </div>
+            <div class="row infoRow">
+                <div class="col-sm-4 mb-4">
+                    <div class="card skillsCard">
+                        <div class="card-body">
+                            <p class="text-center">MERN</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card skillsCard">
+                        <div class="card-body">
+                            <p class="text-center">JavaScript</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card skillsCard">
+                        <div class="card-body">
+                            <p class="text-center">MEAN</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card skillsCard">
+                        <div class="card-body">
+                            <p class="text-center">Python</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="projects" id="projects">
+            <div class="main-heading">
+                <h1 class="font-weight-bold">Projects</h1>
+            </div>
+
+            <div class="row infoRow">
+                <div class="col-sm-4 mb-4">
+                    <div class="card projectsCard">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold">Project name</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, cum! At laboriosam hic
+                                tempora aliquid, aut vero reiciendis neque qui, velit cumque voluptate?</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="" class="project_link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card projectsCard">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold">Project name</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, cum! At laboriosam hic
+                                tempora aliquid, aut vero reiciendis neque qui, velit cumque voluptate?</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="" class="project_link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card projectsCard">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold">Project name</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, cum! At laboriosam hic
+                                tempora aliquid, aut vero reiciendis neque qui, velit cumque voluptate?</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="" class="project_link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card projectsCard">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold">Project name</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In, cum! At laboriosam hic
+                                tempora aliquid, aut vero reiciendis neque qui, velit cumque voluptate?</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="" class="project_link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/templateDependencies/typewritterEffect.js"></script>
+    <script type="text/javascript " src="/templateDependencies/vanilla-tilt.js "></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".skillsCard "), {
+            max: 35,
+            speed: 400
+        });
+    </script>
+</body>
+
+</html>

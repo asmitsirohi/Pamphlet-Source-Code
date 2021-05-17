@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Portfolio Template</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/templates">Templates</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            {{#if loggedinUser}}
+            
+            {{#ifNotCond role 'user'}}
+                <a href="/admin" class="btn btn-info">Admin Console</a>
+            {{/ifNotCond}}
+            
+            <div class="user-area dropdown">
+                <a href="#" class="active nav-link nameText admin_navbar" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" data-display="static" style="color: white !important;">
+                    Welcome {{loggedinUser}}
+                </a>
+                <div class="user-menu dropdown-menu dropdown-menu-sm-right">
+                    <a href="/user/logout" class="nav-link logout" style="color: white;"><i
+                            class="fas fa-power-off"></i>
+                        Logout</a>
+                    <a href="/user/profile" class="nav-link logout" style="color: white;"><i
+                            class="fas fa-user-alt"></i>
+                        Profile</a>
+                </div>
+            </div>
+            {{else}}
+            <a href="/user/login" class="btn btn-primary">Login</a>
+            <a href="/user/signup" class="btn btn-primary ml-2">Signup</a>
+            {{/if}}
+        </form>
+    </div>
+</nav>

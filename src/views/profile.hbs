@@ -1,0 +1,90 @@
+{{> navbar}}
+
+<!--Delete Protfolio template Modal -->
+<div class="modal fade" id="deletePortfolioModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    role="dialog" aria-labelledby="deletePortfolioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger font-weight-bold" id="deletePortfolioModalLabel">Delete Portfolio
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/deletePortfolio" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="deletePortfolioId" id="deletePortfolioId">
+                    Do you want to delete this Portfolio?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container my-4">
+    <h3>Hello, {{loggedinUser}}</h3>
+
+    <h5 class="text-danger my-3">Here is your Portfolios.</h5>
+    <div class="row">
+        {{#if bulkTemplates}}
+        {{#each bulkTemplates as |template| }}
+        {{#each template }}
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <img src="{{image}}" class="card-img-top" alt="..." width="480px">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text">{{{description}}}</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a data-toggle="collapse" href="#templateLink{{_id}}" role="button" aria-expanded="false"
+                                aria-controls="templateLink{{_id}}" class="btn btn-primary btn-block btn-sm"
+                                target="_blank">Link</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-danger btn-block btn-sm deletePortfolio" id="{{_id}}">Delete</button>
+                        </div>
+                    </div>
+                    <div class="collapse mt-2" id="templateLink{{_id}}">
+                        <div class="card card-body">
+                            <a href="/{{../../loggedinUsername}}/{{foldername}}"
+                                target="_blank">{{../../loggedinUsername}}/{{foldername}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{/each}}
+        {{else}}
+        <div class="container my-4">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class=" text-center display-4 text-danger">No Portfolios</h1>
+                </div>
+            </div>
+        </div>
+
+        {{/if}}
+    </div>
+</div>
+
+<script>
+    const deletePortfolio = document.getElementsByClassName('deletePortfolio');
+    Array.from(deletePortfolio).forEach(element => {
+        element.addEventListener('click', event => {
+            const id = event.target.id;
+            deletePortfolioId.value = id;
+            $('#deletePortfolioModal').modal('toggle');
+        });
+    });
+
+</script>

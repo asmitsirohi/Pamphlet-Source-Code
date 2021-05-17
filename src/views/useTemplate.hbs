@@ -1,0 +1,349 @@
+{{> navbar}}
+{{> alerts}}
+
+{{!-- jQuery filer --}}
+<link rel="stylesheet" href="/libs/jquery_filer/css/jquery.filer.css">
+<script src="/libs/jquery_filer/js/jquery.filer.js"></script>
+
+<style>
+    @media (min-width: 576px) {
+
+        .mr-sm-2,
+        .mx-sm-2 {
+            margin-right: 0rem !important;
+        }
+    }
+</style>
+
+<div class="container my-4">
+    <form id="portFolio-form" enctype="multipart/form-data">
+        <section>
+            <h1 class="text-center my-3">Introduction</h1>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email <small>(To which people reach you.)</small></label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <label for="key_points">Key Points <small>(separated by commas(,))</small></label>
+                <input type="text" class="form-control" id="key_points" name="key_points"
+                    placeholder="e.g. Web Developer,Android Developer" required />
+            </div>
+            <div class="form-group">
+                <label for="Introtagline">Tag Line</label>
+                <textarea class="form-control" id="Introtagline" name="Introtagline" rows="2" placeholder="Type here..."
+                    required></textarea>
+            </div>
+            <div class="form-group mt-4">
+                <div class="custom-file">
+                    <label for="profileImage">Choose Profile Image</label>
+                    <input type="file" name="profileImage" id="profileImage" required>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 70px;">
+            <h1 class="text-center my-3">About</h1>
+            <input type="hidden" name="templateId" id="templateId" value="{{id}}" required />
+            <div class="form-group">
+                <label for="about">About</label>
+                <textarea class="form-control" id="about" rows="3" name="about" placeholder="Type here..."
+                    required></textarea>
+            </div>
+
+        </section>
+        <section>
+            <h1 class="text-center my-3">Skills</h1>
+            <div class="form-group">
+                <label for="skills">Skills <small>(separated by commas(,))</small></label>
+                <input type="text" class="form-control" id="skills" name="skills" placeholder="Skills..." required />
+            </div>
+        </section>
+
+        <section>
+            <h1 class="text-center my-3">Projects</h1>
+
+            <div class="projectList">
+                <div class="form-group">
+                    <label for="project1">Project <span id="projectNum">name</span></label>
+                    <input type="text" name="project1name" id="project1name" class="form-control" required
+                        placeholder="Enter project name" />
+                </div>
+                <div class="form-group">
+                    <label for="project1Description">Description</label>
+                    <textarea class="form-control  " id="project1Description" name="project1Description" rows="2"
+                        placeholder="Type here..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project1View">Project Link</label>
+                    <input type="text" name="project1View" id="project1View" class="form-control" required
+                        placeholder="Enter project link" />
+                </div>
+            </div>
+            <div class="form-group text-center mt-4">
+                <button type="button" class="btn btn-success" id="addProject">Add another project</button>
+                <button type="button" class="btn btn-danger" id="removeProject" style="display: none;">Remove recent
+                    Project</button>
+            </div>
+        </section>
+        <section>
+            <h1 class="text-center my-3">Social Media Handles</h1>
+            <div class="linkList">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <select class="custom-select mr-sm-2" id="linkType1" name="linkType1" aria-haspopup="true"
+                            aria-expanded="false" required>
+                            <option value="github" selected>Github</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="instagram">Instagram</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Social Media Link" placeholder="Enter url"
+                        name="link1url" id="link1url" required>
+                </div>
+            </div>
+
+            <div class="form-group text-center mt-4">
+                <button type="button" class="btn btn-success" id="addLink">Add another link</button>
+                <button type="button" class="btn btn-danger" id="removeLink" style="display: none;">Remove recent
+                    link</button>
+            </div>
+
+        </section>
+
+        <div class="form-group mt-4" id="submitBtn">
+            <button type="submit" class="btn btn-info btn-block" id="disableme">Submit</button>
+        </div>
+        <div class="form-group mt-4" id="spinnerSubmitBtn" style="display: none;">
+            <button class="btn btn-info btn-block text-uppercase" disabled>
+                <span class="spinner-border spinner-border-sm"></span>
+                Loading..
+            </button>
+        </div>
+
+
+    </form>
+
+    <div id="editor"></div>
+</div>
+
+{{!-- CKEDITOR 4 --}}
+<script src="/libs/ckeditor/ckeditor.js"></script>
+
+<script>
+    // Ckeditor
+    CKEDITOR.replace('about');
+    CKEDITOR.replace('project1Description');
+
+    // jQUery filer
+    $('#profileImage').filer({
+        showThumbs: true,
+        addMore: false,
+        allowDuplicates: false,
+    });
+
+    $('.jFiler-input').css('width', '100%');
+
+    const projectNum = document.getElementById('projectNum');
+    const projectList = document.querySelector('.projectList');
+    const addProject = document.getElementById('addProject');
+    const removeProject = document.getElementById('removeProject');
+
+    let projectCount = 1;
+    addProject.onclick = () => {
+        projectNum.innerHTML = 1;
+        projectCount++;
+
+        let nextProject = `
+            <div id="project${projectCount}">
+                <hr style="background:white;">
+                <div class="form-group">
+                    <label for="project${projectCount}">Project ${projectCount}</label>
+                    <input type="text" name="project${projectCount}name" id="project${projectCount}name" class="form-control" required
+                        placeholder="Enter project name" />
+                </div>
+                <div class="form-group">
+                    <label for="project${projectCount}Description">Description</label>
+                    <textarea class="form-control  " id="project${projectCount}Description" name="project${projectCount}Description" rows="2"
+                        placeholder="Type here..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project${projectCount}View">Project Link</label>
+                    <input type="text" name="project${projectCount}View" id="project${projectCount}View" class="form-control" required
+                        placeholder="Enter project link" />
+                </div>
+            </div>
+        `;
+
+        projectList.insertAdjacentHTML('beforeend', nextProject);
+        CKEDITOR.replace(`project${projectCount}Description`);
+        removeProject.style.display = 'inline-block';
+    }
+
+    removeProject.onclick = () => {
+        if (projectCount != 1) {
+            document.getElementById(`project${projectCount}`).remove();
+            projectCount--;
+        }
+
+        if (projectCount == 1) {
+            removeProject.style.display = 'none';
+        }
+    }
+
+    const linkList = document.querySelector('.linkList');
+    const addLink = document.getElementById('addLink');
+    const removeLink = document.getElementById('removeLink');
+
+    let linkCount = 1;
+    addLink.onclick = () => {
+        linkCount++;
+
+        let nextLink = `
+        <div id="link${linkCount}">
+            <hr style="background:white;">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <select class="custom-select mr-sm-2" id="linkType${linkCount}" name="linkType${linkCount}" aria-haspopup="true"
+                        aria-expanded="false" required>
+                        <option value="github" selected>Github</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="twitter">Twitter</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                    </select>
+                </div>
+                <input type="text" class="form-control" aria-label="Social Media Link" placeholder="Enter url"
+                    name="link${linkCount}url" id="link${linkCount}url" required>
+            </div>
+        </div>
+        `;
+
+        linkList.insertAdjacentHTML('beforeend', nextLink);
+        removeLink.style.display = 'inline-block';
+    }
+
+    removeLink.onclick = () => {
+        if (linkCount != 1) {
+            document.getElementById(`link${linkCount}`).remove();
+            linkCount--;
+        }
+
+        if (linkCount == 1) {
+            removeLink.style.display = 'none';
+        }
+    }
+
+    const form = document.getElementById('portFolio-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinnerSubmitBtn = document.getElementById('spinnerSubmitBtn');
+    const someWrongAlert = document.getElementById('someWrongAlert');
+    const errorAlert = document.getElementById('errorAlert');
+    const successAlert = document.getElementById('successAlert');
+    const invalidFileAlert = document.getElementById('invalidFileAlert');
+    const fileSizeAlert = document.getElementById('fileSizeAlert');
+
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+
+        submitBtn.style.display = 'none';
+        spinnerSubmitBtn.style.display = 'block';
+
+        const name = document.getElementById('name').value;
+        const Introtagline = document.getElementById('Introtagline').value;
+        const profileImage = document.getElementsByTagName("input")[3].files[0];
+        const templateId = document.getElementById('templateId').value;
+        const about = CKEDITOR.instances['about'].getData();
+        const skills = document.getElementById('skills').value;
+        const key_points = document.getElementById('key_points').value;
+        const email = document.getElementById('email').value;
+
+        let projects = [];
+
+        for (let i = 1; i <= projectCount; i++) {
+            const projectName = document.getElementById(`project${i}name`).value;
+            // const projectDescription = document.getElementById(`project${i}Description`).value;
+            const projectDescription = CKEDITOR.instances[`project${i}Description`].getData();;
+            const projectLink = document.getElementById(`project${i}View`).value;
+
+            let obj = {
+                projectName,
+                projectDescription,
+                projectLink
+            };
+
+            projects.push(obj);
+        }
+
+        let links = [];
+
+        for (let i = 1; i <= linkCount; i++) {
+            const linkType = document.getElementById(`linkType${i}`).value;
+            const link = document.getElementById(`link${i}url`).value;
+
+            let obj = {
+                [linkType]: link
+            };
+
+            links.push(obj);
+        }
+
+        const formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('Introtagline', Introtagline);
+        formData.append('profileImage', profileImage);
+        formData.append('templateId', templateId);
+        formData.append('about', about);
+        formData.append('skills', skills);
+        formData.append('key_points', key_points);
+        formData.append('email', email);
+        formData.append('projects', JSON.stringify(projects));
+        formData.append('links', JSON.stringify(links));
+
+        const result = await fetch('/useTemplate', {
+            method: 'POST',
+            body: formData
+        }).then((res) => res.json());
+
+        spinnerSubmitBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+
+        if (result.status == 'ok') {
+            successAlert.style.display = 'block';
+            document.getElementById('disableme').disabled = true;
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+                window.location.href = '/user/profile';
+            }, 3000);
+        } else {
+            if (result.error == "already_exists") {
+                errorAlert.style.display = 'block';
+                setTimeout(() => {
+                    errorAlert.style.display = 'none';
+                }, 5000);
+            } else if (result.error == 'invalid_image') {
+                invalidFileAlert.style.display = 'block';
+                setTimeout(() => {
+                    invalidFileAlert.style.display = 'none';
+                }, 5000);
+            } else if (result.error == 'file_size_exceed') {
+                fileSizeAlert.style.display = 'block';
+                setTimeout(() => {
+                    fileSizeAlert.style.display = 'none';
+                }, 5000);
+            } else {
+                someWrongAlert.style.display = 'block';
+                setTimeout(() => {
+                    someWrongAlert.style.display = 'none';
+                }, 5000);
+            }
+        }
+    }
+
+</script>

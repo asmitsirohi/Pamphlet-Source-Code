@@ -1,0 +1,157 @@
+{{#if verifyTokenOTP}}
+
+{{else}}
+<script>
+    window.location.href = '/';
+</script>
+{{/if}}
+
+{{> alerts}}
+<style>
+    .card {
+        top: 25px;
+        bottom: 25px;
+        width: 350px;
+        padding: 10px;
+        border-radius: 20px;
+        border: none;
+        height: 452px;
+        position: relative
+    }
+
+    .container {
+        height: 75vh
+    }
+
+    .mobile-text {
+        color: #989696b8;
+        font-size: 15px
+    }
+
+    .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #ff8880;
+        outline: 0;
+        box-shadow: none
+    }
+
+    .cursor {
+        cursor: pointer
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Email verification</h5>
+        <span class="mobile-text">
+            Enter the code we just send on your email 
+            <b class="text-danger">
+                {{verifyTokenOTP.email}}
+            </b>
+        </span>
+        <form id="otp-form">
+            <div class="mt-4">
+                <label for="otp">OTP</label>
+                <input type="number" id="otp" class="form-control" autofocus="" autocomplete="off"
+                    placeholder="Enter OTP" required>
+            </div>
+            <div class="my-3 ml-2">
+                <div class="g-recaptcha" data-sitekey="6LdazLgaAAAAAN82FE58sMGuVjsgDyx0-cJAQMhd"></div>
+            </div>
+            <div class="text-center mt-3">
+                <span class="d-block mobile-text">Do not share your OTP with others?</span>
+                <div id="submitBtn">
+                    <button type="submit" class="btn btn-danger mt-2">Verify</button>
+                </div>
+                <div id="spinnerSubmitBtn" style="display: none;">
+                    <button class="btn btn-danger mt-2" disabled>
+                        <span class="spinner-border spinner-border-sm"></span>
+                        Loading..
+                    </button>
+                </div>
+                <span class="mt-2 d-block text-danger" style="font-size: 15px;">Your OTP will expires in 5
+                    minutes?</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    $(function () {
+        $('input, select').on('focus', function () {
+            $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+        });
+        $('input, select').on('blur', function () {
+            $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+        });
+    });
+
+    const form = document.getElementById('otp-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinnerSubmitBtn = document.getElementById('spinnerSubmitBtn');
+    const errorAlert = document.getElementById('errorAlert');
+    const invalidOTPAlert = document.getElementById('invalidOTPAlert');
+    const otpExpiresAlert = document.getElementById('otpExpiresAlert');
+    const accountCreatedAlert = document.getElementById('accountCreatedAlert');
+    const someWrongAlert = document.getElementById('someWrongAlert');
+
+    form.addEventListener('submit', registerUser);
+
+    async function registerUser(e) {
+        e.preventDefault();
+
+        submitBtn.style.display = 'none';
+        spinnerSubmitBtn.style.display = 'block';
+
+        const otp = document.getElementById('otp').value;
+        const grecaptacha = grecaptcha.getResponse();
+
+        const result = await fetch('/user/otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                otp,
+                grecaptacha
+            })
+        }).then((res) => res.json());
+
+        spinnerSubmitBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+        if (result.status == "ok") {
+            accountCreatedAlert.style.display = 'block';
+            setTimeout(() => {
+                accountCreatedAlert.style.display = 'none';
+                window.location.href = '/user/login';
+            }, 5000);
+        } else if (result.error == "invalid_otp") {
+            invalidOTPAlert.style.display = 'block';
+            setTimeout(() => {
+                invalidOTPAlert.style.display = 'none';
+            }, 5000);
+        } else if (result.error == "invalid_captcha") {
+            invalidCaptchaAlert.style.display = 'block';
+            setTimeout(() => {
+                invalidCaptchaAlert.style.display = 'none';
+            }, 5000);
+        } else if (result.error == "otp_expires") {
+            otpExpiresAlert.style.display = 'block';
+            setTimeout(() => {
+                otpExpiresAlert.style.display = 'none';
+            }, 5000);
+        } else {
+            someWrongAlert.style.display = 'block';
+            setTimeout(() => {
+                someWrongAlert.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 300000);
+
+</script>

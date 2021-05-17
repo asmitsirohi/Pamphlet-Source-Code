@@ -1,0 +1,29 @@
+{{> navbar}}
+
+<div class="container my-4">
+    <div class="row">
+        {{#each templates }}
+        <div class="col-sm-4 mb-4">
+            <div class="card">
+                <a href="{{image}}" target="_blank">
+                    <img src="{{image}}" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text">{{{description}}}</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="/demo/{{_id}}" class="btn btn-primary btn-block" target="_blank">View</a>
+                        </div>
+                        {{#if ../loggedinUser}}
+                        <div class="col-sm-6">
+                            <a href="/useTemplate/{{_id}}" class="btn btn-primary btn-block">Use</a>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

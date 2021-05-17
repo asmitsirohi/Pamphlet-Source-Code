@@ -1,0 +1,93 @@
+<style>
+    select {
+        max-width: 132px;
+    }
+</style>
+
+{{> admin_navbar}}
+{{> alerts}}
+
+<div class="container my-4">
+    <div class="border rounded p-4">
+        <h2 class="text-center">
+            <i class="fas fa-check-circle"></i> &nbsp; Assign Role
+        </h2>
+
+        <section>
+            <table class="table mt-4">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users }}
+                    <tr>
+                        <th scope="row">{{indexIncrement @index 1}}</th>
+                        <td>{{name}}</td>
+                        <td>
+                            {{#ifCond role 'admin'}}
+                            <select class="custom-select my-1 mr-sm-2 rolesSelect">
+                                <option value="admin?{{_id}}" selected>Admin</option>
+                                <option value="co-admin?{{_id}}">Co-Admin</option>
+                                <option value="user?{{_id}}">User</option>
+                            </select>
+                            {{else}}
+                            {{#ifCond role 'co-admin'}}
+                            <select class="custom-select my-1 mr-sm-2 rolesSelect">
+                                <option value="admin?{{_id}}">Admin</option>
+                                <option value="co-admin?{{_id}}" selected>Co-Admin</option>
+                                <option value="user?{{_id}}">User</option>
+                            </select>
+                            {{else}}
+                            <select class="custom-select my-1 mr-sm-2 rolesSelect">
+                                <option value="admin?{{_id}}">Admin</option>
+                                <option value="co-admin?{{_id}}">Co-Admin</option>
+                                <option value="user?{{_id}}" selected>User</option>
+                            </select>
+                            {{/ifCond}}
+                            {{/ifCond}}
+
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<script>
+    const someWrongAlert = document.getElementById('someWrongAlert');
+    const rolesSelect = document.getElementsByClassName('rolesSelect');
+
+    Array.from(rolesSelect).forEach(element => {
+        element.addEventListener('change', event => {
+            let value = event.target.value;
+            value = value.split('?');
+
+            fetch('/admin/assignRole', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    roleName: value[0],
+                    userId: value[1]
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.status == 'error') {
+                        someWrongAlert.style.display = 'block';
+                        setTimeout(() => {
+                            someWrongAlert.style.display = 'none';
+                        }, 5000);
+                    }
+                })
+        });
+    });
+
+</script>
