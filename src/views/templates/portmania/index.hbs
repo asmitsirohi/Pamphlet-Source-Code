@@ -356,21 +356,21 @@
                     <div class="col-sm-8 ">
                         <div class="mb-4 ">
                             <label for="username" class="form-label font-style ">Name</label>
-                            <input type="text " class="form-control " id="username" placeholder="Enter your name... ">
+                            <input type="text " class="form-control " id="username" placeholder="Enter your name... " required>
                         </div>
                         <div class="mb-4 ">
                             <label for="useremail" class="form-label font-style ">Email address</label>
-                            <input type="email " class="form-control " id="useremail" placeholder="Enter your email... ">
+                            <input type="email " class="form-control " id="useremail" placeholder="Enter your email... " required>
                         </div>
                         <input type="hidden" id="hostemail" value="{{email}}" required>
                         <input type="hidden" id="hostname" value="{{name}}" required>
                         <div class="mb-4 ">
                             <label for="subject" class="form-label font-style ">Subject</label>
-                            <input type="text" class="form-control " id="subject" placeholder="Enter Subject... ">
+                            <input type="text" class="form-control " id="subject" placeholder="Enter Subject... " required>
                         </div>
                         <div class="mb-4 ">
                             <label for="message" class="form-label font-style ">Your Message</label>
-                            <textarea class="form-control " id="message" rows="3 "></textarea>
+                            <textarea class="form-control " id="message" rows="3 " required></textarea>
                         </div>
                         <div class="col-12 ">
                             <button type="submit" id="nonSpinnerBtn" class="btn btn-primary mb-4 ">Submit</button>

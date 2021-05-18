@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!--************************************ J-QUERY CDN **************************************-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <title>Portfolio</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+        *,
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Ubuntu", sans-serif;
+            overflow-x: hidden;
+        }
+
+        .intro {
+            height: 100vh;
+            width: 100%;
+            background: url("/templateDependencies/background_images/portfolio.jpg");
+            background-repeat: none;
+            background-size: cover;
+            background-position: top;
+            overflow-x: hidden;
+        }
+
+        .intro::before {
+            position: absolute;
+            content: "";
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .navbar-brand {
+            font-size: 30px !important;
+        }
+
+        .navbar.bg-transparent {
+            border: none;
+        }
+
+        .intro-content {
+            transform: translateY(70%);
+        }
+
+        .intro-content h1 {
+            color: white;
+            font-weight: bolder !important;
+            font-size: 50px;
+        }
+
+        .intro-content p {
+            color: white;
+            font-size: 20px;
+        }
+
+        .intro-content .element {
+            color: red;
+        }
+
+        .about {
+            margin-bottom: 120px !important;
+            margin-top: 80px !important;
+        }
+
+        .about-content {
+            margin-top: 50px !important;
+        }
+
+        .projects {
+            width: auto;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        .project-heading {
+            margin-top: 100px !important;
+        }
+
+        .project-content {
+            margin-top: 80px !important;
+            margin-bottom: 120px !important;
+        }
+
+        .container .card {
+            box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.336);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .container .card .content {
+            padding: 20px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .container .card .content h3 {
+            position: absolute;
+            top: -7px;
+            right: 30px;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .container .card-body .content p {
+            margin-top: 55px;
+            font-size: 1em;
+            font-weight: 300;
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+
+        .mb-4 a {
+            position: relative;
+            display: inline-block;
+            padding: 8px 20px !important;
+            margin-top: 10px !important;
+            background: black !important;
+            color: white !important;
+            border-radius: 20px !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }
+
+        .style {
+            margin-bottom: 120px !important;
+        }
+
+        .contact-content {
+            margin-top: 70px !important;
+            margin-bottom: 50px !important;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: black;
+            transition: 0.5s;
+        }
+
+        .fab {
+            font-size: 28px;
+            padding: 10px 12px;
+        }
+
+        .social-links {
+            margin-bottom: 40px !important;
+        }
+
+        .alert {
+            position: absolute;
+            z-index: 1000;
+            width: 99.5vw;
+            display: none;
+            margin-top: 123px;
+            margin-left: -15px;
+        }
+
+        .alert strong {
+            margin: 0;
+        }
+
+        .btn {
+            margin-bottom: 70px !important;
+        }
+
+        @media only screen and (max-width: 991px) {
+            .intro-content {
+                transform: translateY(70%) !important;
+            }
+        }
+
+
+        @media screen and (max-width: 1200px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        .mt-4 a {
+            position: relative;
+            display: inline-block;
+            padding: -1px 10px !important;
+            background: black !important;
+            color: white !important;
+            border-radius: 20px !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--******************************** NAVBAR-STARTED *******************************************-->
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-transparent nav_font">
+        <a class="navbar-brand" href="#">Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#skills">Skill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active mx-4" href="#project">Project</a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>Your Details have been recieved.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        </div>
+
+    </nav>
+
+    <!--******************************** INTRO-PAGE STARTED *************************************-->
+
+    <section id="home" class="intro">
+        <div class="container">
+            <br>
+            <div class="intro-content col-sm-8 my-auto">
+                <h1>
+                    Hello, I am John Doe.
+                </h1><br>
+                <h2 style="color: white;">
+                    I Am a <span class="typewrite element" data-period="2000"
+                        data-type='["Developer", "Designer" , "Freelancer" ]'>
+                        <span class="wrap"></span>
+                    </span>
+                </h2> <br>
+                <p class="mt-2 desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorum architecto
+                    nisi ipsa?</p>
+            </div>
+        </div>
+        <br>
+    </section>
+    <!--**************************************** ABOUT-SECTION ******************************-->
+
+    <div data-aos="new-animation">
+        <div class="container" id="about">
+            <section class="about">
+                <div class="font-weight-bolder">
+                    <h1>ABOUT ME</h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 about-content" data-aos="zoom-in-right" data-aos-easing="linear"
+                        data-aos-duration="1000">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam adipisci inventore pariatur
+                            eaque delectus quam eveniet excepturi ex maxime, iure commodi. Dolorum odio alias cum
+                            commodi veniam mollitia facilis ut! Alias magni molestiae
+                            harum quidem quisquam perferendis repellat ab nisi, illo sint labore veniam error, ea
+                            deleniti nobis. Iusto optio enim quod ullam facere nesciunt ad eveniet aperiam reprehenderit
+                            ex.
+                        </p>
+                    </div>
+
+                    <div class="col-sm-4 mx-auto" data-aos="zoom-in-left" data-aos-easing="linear"
+                        data-aos-duration="1000">
+                        <img src="/templateDependencies/images/avatar2.png" alt="Profile Pic"
+                            class="profileImage rounded mx-auto d-block mt-3" width="250px">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+        <!--***************************************** SKILLS-SECTION *********************************-->
+
+        <section class="skills" id="skills">
+            <div class="container style">
+                <h1>Skills</h1>
+                <div class=" about-content">
+
+                    <div class="row  text-center">
+                        <div class="col-sm-6 mx-auto" data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span class="badge badge-primary">JAVA</span>
+                            </h3>
+                        </div>
+                        <div class="col-sm-6 mb-4 mt-3" data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span class="badge badge-success">Python</span>
+                            </h3>
+                        </div>
+                        <div class="col-sm-6 mb-4 " data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span style="color: aliceblue;" class="badge response">JavaScript</span>
+                            </h3>
+                        </div>
+                        <div class="col-sm-6 mb-4 " data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span style="color: aliceblue;" class="badge response">Bootstrap</span>
+                            </h3>
+                        </div>
+                        <div class="col-sm-6 mb-4 " data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span style="color: aliceblue;" class="badge response">PHP</span>
+                            </h3>
+                        </div>
+                        <div class="col-sm-6 mb-4 " data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span style="color: aliceblue;" class="badge response">MERN</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--************************************* PROJECT-SECTION **********************************-->
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <h1>Projects</h1>
+
+                <div class="row project-content text-center">
+                    <div class="col-sm-4 mb-4 mx-auto">
+                        <div class="card" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+
+                            <div class="card-body mb-4 response">
+                                <h3>QLRC</h3>
+                                <p class="my-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed
+                                    commodi iure at eligendi facilis nobis quia repellendus earum sapiente facere
+                                    possimus minima libero, veniam soluta ullam harum quis laboriosam quo.</p>
+                                <a href="# " class="mb-4">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4 mb-4 mx-auto">
+                        <div class="card" data-aos="flip-down">
+
+                            <div class="card-body mb-4 response">
+                                <h3>QLRC</h3>
+                                <p class="my-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed
+                                    commodi iure at eligendi facilis nobis quia repellendus earum sapiente facere
+                                    possimus minima libero, veniam soluta ullam harum quis laboriosam quo.</p>
+                                <a href="# " class="mb-4">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4 mb-4 mx-auto">
+                        <div class="card" data-aos="fade-left" data-aos-offset="300" data-aos-duration="300">
+                            <!-- <div class="response"></div> -->
+                            <div class="card-body mb-4 response">
+                                <h3>QLRC</h3>
+                                <p class="my-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed
+                                    commodi iure at eligendi facilis nobis quia repellendus earum sapiente facere
+                                    possimus minima libero, veniam soluta ullam harum quis laboriosam quo.</p>
+                                <a href="# " class="mb-4">Read more</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--*************************************** CONTACT-SECTION *********************************-->
+
+
+        <div class="container" id="contact">
+            <section class="contact">
+                <div class="contact-heading">
+                    <h1>Contact : Let's Have A Chat</h1>
+                </div>
+                <div class="contact-content">
+                    <form>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="name@example.com">
+                        </div>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="exampleFormControlInput2">Name</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Enter Your Name">
+                        </div>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="exampleFormControlInput2">Subject</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Subject">
+                        </div>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="exampleFormControlTextarea1">Your Message</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Type Your Message Here..."></textarea>
+                        </div>
+
+                    </form>
+                </div>
+                <button onclick="myFunction()" type="button mb-4" class="btn btn-success btn-lg btn-block"
+                    data-aos="zoom-in-up">Submit</button>
+            </section>
+        </div>
+    </div>
+
+    <!--*************************** SOCIAL-LINKS SECTION ***********************************8-->
+    <footer class="social-links mt-4">
+        <p class="text-center links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </p>
+    </footer>
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+    <script src="/templateDependencies/typewritterEffect.js"></script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- **************************SCRIPT FOR RANDOM COLOR IN CARDS AND BADGES***************************** -->
+    <script>
+        function get_random_color() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+            return color;
+        }
+        $(function () {
+            $(".response").each(function () {
+                $(this).css("background-color", get_random_color());
+            });
+        });
+
+    </script>
+
+    <script>
+        function myFunction() {
+            $(".alert").show();
+        }
+    </script>
+
+</body>
+
+</html>

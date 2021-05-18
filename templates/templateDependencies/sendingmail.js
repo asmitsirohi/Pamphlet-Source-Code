@@ -1,6 +1,12 @@
 const form = document.getElementById("userEmailForm");
 const nonSpinnerBtn = document.getElementById("nonSpinnerBtn");
 const spinnerBtn = document.getElementById("spinnerBtn");
+let mailsent = null;
+try {
+  mailsent = document.getElementById("mailsent");
+} catch (error) {
+  mailsent = null;
+}
 
 form.onsubmit = (e) => {
   e.preventDefault();
@@ -34,7 +40,14 @@ form.onsubmit = (e) => {
       spinnerBtn.style.display = "none";
       nonSpinnerBtn.style.display = "block";
       if (res.status == "ok") {
-        alert("Mail Sent Successfully");
+        if(mailsent != null) {
+          mailsent.style.display = 'block';
+          setTimeout(() => {
+            mailsent.style.display = 'none';
+          }, 5000);
+        } else {
+          alert("Mail Sent Successfully");
+        }
       } else {
         alert("Something Went Wrong. Please, Try after sometime");
       }

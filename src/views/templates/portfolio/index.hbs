@@ -1,0 +1,476 @@
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!--************************************ J-QUERY CDN **************************************-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+        *,
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Ubuntu", sans-serif;
+            overflow-x: hidden;
+        }
+
+        .intro {
+            height: 100vh;
+            width: 100%;
+            background: url("/templateDependencies/background_images/portfolio.jpg");
+            background-repeat: none;
+            background-size: cover;
+            background-position: top;
+            overflow-x: hidden;
+        }
+
+        .intro::before {
+            position: absolute;
+            content: "";
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .navbar-brand {
+            font-size: 30px !important;
+        }
+
+        .navbar.bg-transparent {
+            border: none;
+        }
+
+        .intro-content {
+            transform: translateY(70%);
+        }
+
+        .intro-content h1 {
+            color: white;
+            font-weight: bolder !important;
+            font-size: 50px;
+        }
+
+        .intro-content p {
+            color: white;
+            font-size: 20px;
+        }
+
+        .intro-content .element {
+            color: red;
+        }
+
+        .about {
+            margin-bottom: 120px !important;
+            margin-top: 80px !important;
+        }
+
+        .about-content {
+            margin-top: 50px !important;
+        }
+
+        .projects {
+            width: auto;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        .project-heading {
+            margin-top: 100px !important;
+        }
+
+        .project-content {
+            margin-top: 80px !important;
+            margin-bottom: 120px !important;
+        }
+
+        .container .card {
+            box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.336);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .container .card .content {
+            padding: 20px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .container .card .content h3 {
+            position: absolute;
+            top: -7px;
+            right: 30px;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .container .card-body .content p {
+            margin-top: 55px;
+            font-size: 1em;
+            font-weight: 300;
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+
+        .mb-4 a {
+            position: relative;
+            display: inline-block;
+            padding: 8px 20px !important;
+            margin-top: 10px !important;
+            background: black !important;
+            color: white !important;
+            border-radius: 20px !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }
+
+        .style {
+            margin-bottom: 120px !important;
+        }
+
+        .contact-content {
+            margin-top: 70px !important;
+            margin-bottom: 50px !important;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: black;
+            transition: 0.5s;
+        }
+
+        .fab {
+            font-size: 28px;
+            padding: 10px 12px;
+        }
+
+        .social-links {
+            margin-bottom: 40px !important;
+        }
+
+        .alert {
+            position: absolute;
+            z-index: 1000;
+            width: 99.5vw;
+            display: none;
+            margin-top: 123px;
+            margin-left: -15px;
+        }
+
+        .alert strong {
+            margin: 0;
+        }
+
+        .btn {
+            margin-bottom: 70px !important;
+        }
+
+        @media only screen and (max-width: 991px) {
+            .intro-content {
+                transform: translateY(70%) !important;
+            }
+        }
+
+
+        @media screen and (max-width: 1200px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        .mt-4 a {
+            position: relative;
+            display: inline-block;
+            padding: -1px 10px !important;
+            background: black !important;
+            color: white !important;
+            border-radius: 20px !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }
+    </style>
+
+    {{#each usertemplate }}
+    <!--******************************** NAVBAR-STARTED *******************************************-->
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-transparent nav_font">
+        <a class="navbar-brand" href="#">Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#skills">Skill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active mx-4" href="#project">Project</a>
+                </li>
+                <li class="nav-item active mx-4">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="mailsent" style="display: none;">
+            <strong>Success! </strong>Your Details have been recieved.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        </div>
+
+    </nav>
+
+    <!--******************************** INTRO-PAGE STARTED *************************************-->
+
+    <section id="home" class="intro">
+        <div class="container">
+            <br>
+            <div class="intro-content col-sm-8 my-auto">
+                <h1>
+                    Hello, I am {{name}}.
+                </h1><br>
+                <h2 style="color: white;">
+                    <script>
+                        let obj = [];
+                        `{{#each key_points}}
+                        ${obj.push(`{{this}}`)}
+                        {{/each}}`;
+
+                        document.write(`
+                            I Am a <span class="typewrite element" data-period="2000"
+                                data-type='${JSON.stringify(obj)}'>
+                                <span class="wrap"></span>
+                            </span>
+                        `);
+                    </script>
+                </h2> <br>
+                <p class="mt-2 desc">{{Introtagline}}</p>
+            </div>
+        </div>
+        <br>
+    </section>
+    <!--**************************************** ABOUT-SECTION ******************************-->
+
+    <div data-aos="new-animation">
+        <div class="container" id="about">
+            <section class="about">
+                <div class="font-weight-bolder">
+                    <h1>ABOUT ME</h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 about-content" data-aos="zoom-in-right" data-aos-easing="linear"
+                        data-aos-duration="1000">
+                        <p>{{{about}}}</p>
+                    </div>
+
+                    <div class="col-sm-4 mx-auto" data-aos="zoom-in-left" data-aos-easing="linear"
+                        data-aos-duration="1000">
+                        <img src="{{profileImage}}" alt="Profile Pic"
+                            class="profileImage rounded mx-auto d-block mt-3" width="250px">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+        <!--***************************************** SKILLS-SECTION *********************************-->
+
+        <section class="skills" id="skills">
+            <div class="container style">
+                <h1>Skills</h1>
+                <div class=" about-content">
+
+                    <div class="row  text-center">
+                        {{#each skills}}
+                        <div class="col-sm-6 mx-auto" data-aos="zoom-in-left" data-aos-easing="linear"
+                            data-aos-duration="1000">
+                            <h3>
+                                <span class="badge badge-primary">{{this}}</span>
+                            </h3>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--************************************* PROJECT-SECTION **********************************-->
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <h1>Projects</h1>
+
+                <div class="row project-content text-center">
+                    {{#each projects}}
+                    <div class="col-sm-4 mb-4 mx-auto">
+                        <div class="card" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+
+                            <div class="card-body mb-4 response">
+                                <h3>{{projectName}}</h3>
+                                <p class="my-4">{{{projectDescription}}}</p>
+                                <a href="{{projectLink}}" class="mb-4">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+
+        <!--*************************************** CONTACT-SECTION *********************************-->
+
+
+        <div class="container" id="contact">
+            <section class="contact">
+                <div class="contact-heading">
+                    <h1>Contact : Let's Have A Chat</h1>
+                </div>
+                <div class="contact-content">
+                    <form id="userEmailForm">
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="useremail">Email address</label>
+                            <input type="email" class="form-control" id="useremail"
+                                placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="username">Name</label>
+                            <input type="text" class="form-control" id="username"
+                                placeholder="Enter Your Name" required>
+                        </div>
+
+                        <input type="hidden" id="hostemail" value="{{email}}" required>
+                        <input type="hidden" id="hostname" value="{{name}}" required>
+
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group" data-aos="zoom-in-up">
+                            <label for="message">Your Message</label>
+                            <textarea class="form-control" id="message" rows="3"
+                                placeholder="Type Your Message Here..." required></textarea>
+                        </div>
+                        <div id="nonSpinnerBtn">
+                            <button type="submit" class="btn btn-success btn-lg btn-block mb-4" data-aos="zoom-in-up">Submit</button>
+                        </div>
+                        <div id="spinnerBtn" style="display: none;">
+                        <button class="btn btn-success btn-lg btn-block mb-4" id="" type="button" data-aos="zoom-in-up" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Sending...
+                        </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!--*************************** SOCIAL-LINKS SECTION ***********************************8-->
+    <footer class="social-links mt-4">
+        <p class="text-center links">
+            {{#each links as |link|}}
+            {{#if twitter}}
+            <a href="{{twitter}}"><i class="fab fa-twitter"></i></a>
+            {{else}}
+            {{#if linkedin}}
+                <a href="{{linkedin}}"><i class="fab fa-linkedin"></i></a>
+            {{else}}
+                {{#if facebook}}
+                <a href="{{facebook}}"><i class="fab fa-facebook-f"></i></a>
+                {{else}}
+                {{#if instagram}}
+                    <a href="{{instagram}}"><i
+                        class="fab fa-instagram"
+                    ></i></a>
+                {{else}}
+                    <a href="{{github}}"><i class="fab fa-github"></i></a>
+                {{/if}}
+                {{/if}}
+            {{/if}}
+            {{/if}}
+        {{/each}}
+        </p>
+    </footer>
+
+    <script>
+      document.title = 'Portfolio-{{name}}';
+    </script>
+    {{/each}}
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+    <script src="/templateDependencies/typewritterEffect.js"></script>
+    <script src="/templateDependencies/sendingmail.js"></script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- **************************SCRIPT FOR RANDOM COLOR IN CARDS AND BADGES***************************** -->
+    <script>
+        function get_random_color() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+            return color;
+        }
+        $(function () {
+            $(".response").each(function () {
+                $(this).css("background-color", get_random_color());
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
