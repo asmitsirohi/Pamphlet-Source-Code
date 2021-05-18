@@ -1,0 +1,276 @@
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e8daac6d65.js" crossorigin="anonymous"></script>
+    <title>MyLifeMyPortFolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        
+        .nav_font {
+            font-size: 18px;
+        }
+        
+        .logoTextSize {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .font-style {
+            font-weight: bold;
+        }
+        
+        .fab {
+            font-size: 28px;
+            padding: 12px 12px;
+            color: black;
+        }
+        
+        .fab:hover {
+            font-size: 29px;
+            color: blue;
+        }
+        
+        .intro {
+            margin-top: 50px;
+        }
+        
+        introTypewriter {
+            position: relative;
+            text-align: center;
+            border-right: 2px solid black;
+            overflow: hidden;
+        }
+        
+        .about {
+            margin: 50px 0 60px 0;
+        }
+        
+        .skills {
+            margin: 50px 0 60px 0;
+        }
+        
+        .projects {
+            margin: 50px 0 60px 0;
+        }
+        
+        .skills .card {
+            cursor: pointer;
+        }
+        
+        .skills .card:hover {
+            box-shadow: 3px 10px 15px gray;
+            transition: 0.3s;
+        }
+        
+        .slider_range {
+            width: 100%;
+            background-color: #ddd;
+            height: 30px;
+            border-radius: 10px;
+        }
+        
+        .set_range {
+            width: 90%;
+            background-color: lightseagreen;
+            height: 30px;
+            color: white;
+            padding: auto;
+            border-radius: 10px;
+        }
+        
+        .projects .card {
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        
+        .projects .card:hover {
+            color: white;
+            background-color: lightslategrey;
+            box-shadow: 3px 10px 15px gray;
+            transition: 0.3s;
+        }
+        
+        .container p span.typed-text {
+            font-weight: bold;
+            color: #3d32dd;
+        }
+        
+        .container p span.cursor {
+            display: inline-block;
+            background-color: black;
+            margin-left: 0.1rem;
+            width: 3px;
+            animation: blink .8s infinite;
+        }
+        
+        .container p span.cursor.typing {
+            animation: none;
+        }
+    </style>
+
+{{#each usertemplate }}
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark nav_font">
+            <div class="container">
+                <a class="navbar-brand logoTextSize" href="#">MyLifeMyPortFolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active mx-3 my-2" aria-current="page" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-3 my-2" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-3 my-2" href="#skills">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-3 my-2" href="#projects">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-3 my-2" href="#Contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section id="home" class="intro">
+            <br><br>
+            <div class="my-3">
+                <br>
+                <img src="{{profileImage}}" class="rounded mx-auto d-block" alt="profile photo" style="position: relative;" width="250px"> </div>
+            <div class="text-center">
+                <h1 class="font-style">
+                    Hello, I am {{name}}.
+                </h1>
+                <h3 class="font-style">
+                    <p><span class="typewrite typed-text" data-period="2000" data-type='[ "Welcome", "This is my Portfolio", "Here you can find everything about me."]'>
+                        <span class="wrap"></span>
+                        </span>
+                    </p>
+                </h3>
+
+                <p class="mt-4 tagLine">{{Introtagline}}</p>
+                <p class="text-center links">
+                     {{#each links as |link|}}
+                        {{#if twitter}}
+                        <a href="{{twitter}}"><i class="fab fa-twitter"></i></a>
+                        {{else}}
+                        {{#if linkedin}}
+                        <a href="{{linkedin}}"><i class="fab fa-linkedin"></i></a>
+                        {{else}}
+                        {{#if facebook}}
+                        <a href="{{facebook}}"><i class="fab fa-facebook-f"></i></a>
+                        {{else}}
+                        {{#if instagram}}
+                        <a href="{{instagram}}"><i class="fab fa-instagram"></i></a>
+                        {{else}}
+                        <a href="{{github}}"><i class="fab fa-github"></i></a>
+                        {{/if}}
+                        {{/if}}
+                        {{/if}}
+                        {{/if}}
+                    {{/each}}
+                </p>
+            </div>
+            <br>
+        </section>
+        <hr>
+        <section id="about" class="text-center about">
+            <h1 class="font-style mt-4">About</h1>
+            <p class="mt-4">{{{about}}}</p>
+        </section>
+        </section>
+        <hr>
+        <section id="skills" class="text-center skills">
+            <h1 class="font-style">Skills</h1>
+            <div class="row">
+                {{#each skills}}
+                <div class="col-sm-4 mb-4 my-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="text-center font-style">{{this}}</p>
+                            <div class="slider_range">
+                                <div class="set_range" id="set_range">90%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <hr>
+        <section id="projects" class="text-center projects">
+            <h1 class="font-style projects">Projects</h1>
+            <div class="row">
+                {{#each projects }}
+                <div class="col-sm-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="font-style my-4">{{projectName}}</h3>
+                            <p>{{{projectDescription}}}</p>
+                            <a href="{{projectLink}}" class="btn btn-primary my-4">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+        </section>
+        <section id="Contact" class="Contact ">
+            <br>
+            <h1 class="font-style mb-4">Contact Us</h1>
+            <br>
+            <form id="userEmailForm">
+                <div class=" ">
+                    <div class="row">
+                        <div class="mb-4 col-sm-6">
+                            <label for="username" class="form-label font-style">Name</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your name..." required>
+                        </div>
+                        <div class="mb-4 col-sm-6">
+                            <label for="useremail" class="form-label font-style">Email address</label>
+                            <input type="email" class="form-control" id="useremail" placeholder="Enter your email..." required>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="hostemail" value="{{email}}" required>
+                    <input type="hidden" id="hostname" value="{{name}}" required>
+
+                    <div class="mb-4">
+                        <label for="subject" class="form-label font-style">Subject</label>
+                        <input type="tel" class="form-control" id="subject" placeholder="Subject..." required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="form-label font-style">Your Message</label>
+                        <textarea class="form-control" id="message" rows="3" placeholder="Type Here..." required></textarea>
+                    </div>
+                    <div class="d-grid col-12">
+                            <button type="submit" id="nonSpinnerBtn" class="btn btn-primary mb-4">Submit</button>
+                    </div>
+                    <div class="d-grid col-12">
+                        <button class="btn btn-primary mb-4" id="spinnerBtn" type="button" disabled
+                            style="display: none;">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Sending...
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+    </div>
+    </section>
+    </div>
+    <script>
+    document.title = 'Portfolio-{{name}}';
+    </script>
+    {{/each}}
+    <script src="/templateDependencies/typewritterEffect.js"></script>
+    <script src="/templateDependencies/sendingmail.js"></script>
+
