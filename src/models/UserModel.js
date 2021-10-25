@@ -6,28 +6,28 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   email: {
-    type: String
+    type: String,
   },
   username: {
-    type: String
+    type: String,
   },
   password: {
-    type: String
+    type: String,
   },
   googleId: {
-    type: String
+    type: String,
   },
   role: {
     type: String,
-    default: 'user',
-    enum: ['user', 'admin', 'co-admin']
+    default: "user",
+    enum: ["user", "admin", "co-admin"],
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-const User = new mongoose.model('user', userSchema);
+const User = new mongoose.model("user", userSchema);
 
 module.exports = User;

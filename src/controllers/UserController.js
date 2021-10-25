@@ -70,7 +70,6 @@ class UserControlller {
 
         res.status(200).json({ status: "ok" });
       });
-      
     } catch (error) {
       res.status(500).json({ status: "error", error: "wrong" });
     }

@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const mailAuth = require("../utils/mailAuth");
 
-const sendmail = async (email,subject, body, callback) => {
+const sendmail = async (email, subject, body, callback) => {
   //NODEMAILER SPECIFIC STUFF
   let transporter = nodemailer.createTransport({
     service: "gmail",
